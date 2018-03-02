@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TempHumidityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ChamberDtl">
+          <Key>
+            <PropertyRef Name="ChamberName" />
+          </Key>
+          <Property Name="ChamberId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChamberName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="Description" Type="text" />
+          <Property Name="Remarks" Type="text" />
+        </EntityType>
+        <EntityType Name="Humidity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="ChamberName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CurHumidity" Type="float" Nullable="false" />
+          <Property Name="SetHumidity" Type="float" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="Remarks" Type="text" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Temp">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="ChamberName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CurTemp" Type="float" />
+          <Property Name="SetTemp" Type="float" />
+          <Property Name="TimeStamp" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Remarks" Type="text" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="TempHumidityModelStoreContainer">
+          <EntitySet Name="ChamberDtl" EntityType="Self.ChamberDtl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Humidity" EntityType="Self.Humidity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Temp" EntityType="Self.Temp" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TempHumidityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ChamberDtl">
+          <Key>
+            <PropertyRef Name="ChamberName" />
+          </Key>
+          <Property Name="ChamberId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChamberName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Temp">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="ChamberName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CurTemp" Type="Double" />
+          <Property Name="SetTemp" Type="Double" />
+          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityContainer Name="TempHumidityEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ChamberDtls" EntityType="Self.ChamberDtl" />
+          <EntitySet Name="Temps" EntityType="Self.Temp" />
+          <EntitySet Name="Humidities" EntityType="TempHumidityModel.Humidity" />
+        </EntityContainer>
+        <EntityType Name="Humidity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="ChamberName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CurHumidity" Type="Double" Nullable="false" />
+          <Property Name="SetHumidity" Type="Double" Nullable="false" />
+          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TempHumidityModelStoreContainer" CdmEntityContainer="TempHumidityEntities1">
+          <EntitySetMapping Name="ChamberDtls">
+            <EntityTypeMapping TypeName="TempHumidityModel.ChamberDtl">
+              <MappingFragment StoreEntitySet="ChamberDtl">
+                <ScalarProperty Name="ChamberId" ColumnName="ChamberId" />
+                <ScalarProperty Name="ChamberName" ColumnName="ChamberName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Temps">
+            <EntityTypeMapping TypeName="TempHumidityModel.Temp">
+              <MappingFragment StoreEntitySet="Temp">
+                <ScalarProperty Name="ChamberName" ColumnName="ChamberName" />
+                <ScalarProperty Name="CurTemp" ColumnName="CurTemp" />
+                <ScalarProperty Name="SetTemp" ColumnName="SetTemp" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Humidities">
+            <EntityTypeMapping TypeName="TempHumidityModel.Humidity">
+              <MappingFragment StoreEntitySet="Humidity">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="SetHumidity" ColumnName="SetHumidity" />
+                <ScalarProperty Name="CurHumidity" ColumnName="CurHumidity" />
+                <ScalarProperty Name="ChamberName" ColumnName="ChamberName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

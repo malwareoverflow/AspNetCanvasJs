@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ASPNET_MVC_Samples.SETDATA>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+    
+                      <table class="table">
+                          <thead>
+                              <tr>
+                                  <th>@Html.DisplayNameFor(model => model.Station)</th>
+                                  <th>@Html.DisplayNameFor(model => model.SetTempreture)</th>
+                                  <th>@Html.DisplayNameFor(model => model.SetHumidity)</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              @foreach (var item in Model)
+                              {
+                                  <tr>
+
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.Station)
+                                      </td>
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.SetTempreture)
+                                      </td>
+                                      <td>
+                                          @Html.DisplayFor(modelItem => item.SetHumidity)
+                                      </td>
+
+                                      <td>
+                                          @Html.ActionLink("Update", "Edit", new { id = item.Id }) |
+                                          @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+                                      </td>
+                                  </tr>
+                              }
+                          </tbody>
+                      </table>

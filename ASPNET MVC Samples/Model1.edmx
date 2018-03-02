@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SHELLMVCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SETDATAs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Datetime" Type="datetime" />
+          <Property Name="SetTempreture" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SetHumidity" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Station" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StationNames">
+          <Key>
+            <PropertyRef Name="StationName1" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StationName1" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserLogins">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Station" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="UserTypes">
+          <Key>
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VIEWDATAs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Datetime" Type="datetime" />
+          <Property Name="Station" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Tempreture" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Humidity" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SetTempreture" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SetHumidity" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_UserLogins_StationNames">
+          <End Role="StationNames" Type="Self.StationNames" Multiplicity="0..1" />
+          <End Role="UserLogins" Type="Self.UserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StationNames">
+              <PropertyRef Name="StationName1" />
+            </Principal>
+            <Dependent Role="UserLogins">
+              <PropertyRef Name="Station" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLogins_UserTypes">
+          <End Role="UserTypes" Type="Self.UserTypes" Multiplicity="1" />
+          <End Role="UserLogins" Type="Self.UserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTypes">
+              <PropertyRef Name="Type" />
+            </Principal>
+            <Dependent Role="UserLogins">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIEWDATAs_StationNames">
+          <End Role="StationNames" Type="Self.StationNames" Multiplicity="1" />
+          <End Role="VIEWDATAs" Type="Self.VIEWDATAs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StationNames">
+              <PropertyRef Name="StationName1" />
+            </Principal>
+            <Dependent Role="VIEWDATAs">
+              <PropertyRef Name="Station" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SHELLMVCModelStoreContainer">
+          <EntitySet Name="SETDATAs" EntityType="Self.SETDATAs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StationNames" EntityType="Self.StationNames" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLogins" EntityType="Self.UserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTypes" EntityType="Self.UserTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VIEWDATAs" EntityType="Self.VIEWDATAs" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_UserLogins_StationNames" Association="Self.FK_UserLogins_StationNames">
+            <End Role="StationNames" EntitySet="StationNames" />
+            <End Role="UserLogins" EntitySet="UserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLogins_UserTypes" Association="Self.FK_UserLogins_UserTypes">
+            <End Role="UserTypes" EntitySet="UserTypes" />
+            <End Role="UserLogins" EntitySet="UserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIEWDATAs_StationNames" Association="Self.FK_VIEWDATAs_StationNames">
+            <End Role="StationNames" EntitySet="StationNames" />
+            <End Role="VIEWDATAs" EntitySet="VIEWDATAs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SHELLMVCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SHELLMVCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SETDATAs" EntityType="SHELLMVCModel.SETDATA" />
+          <EntitySet Name="StationNames" EntityType="SHELLMVCModel.StationName" />
+          <EntitySet Name="UserLogins" EntityType="SHELLMVCModel.UserLogin" />
+          <EntitySet Name="UserTypes" EntityType="SHELLMVCModel.UserType" />
+          <EntitySet Name="VIEWDATAs" EntityType="SHELLMVCModel.VIEWDATA" />
+          <AssociationSet Name="FK_UserLogins_StationNames" Association="SHELLMVCModel.FK_UserLogins_StationNames">
+            <End Role="StationName" EntitySet="StationNames" />
+            <End Role="UserLogin" EntitySet="UserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIEWDATAs_StationNames" Association="SHELLMVCModel.FK_VIEWDATAs_StationNames">
+            <End Role="StationName" EntitySet="StationNames" />
+            <End Role="VIEWDATA" EntitySet="VIEWDATAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLogins_UserTypes" Association="SHELLMVCModel.FK_UserLogins_UserTypes">
+            <End Role="UserType" EntitySet="UserTypes" />
+            <End Role="UserLogin" EntitySet="UserLogins" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="SETDATA">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Datetime" Type="DateTime" Precision="3" />
+          <Property Name="SetTempreture" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SetHumidity" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Station" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="StationName">
+          <Key>
+            <PropertyRef Name="StationName1" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StationName1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserLogins" Relationship="SHELLMVCModel.FK_UserLogins_StationNames" FromRole="StationName" ToRole="UserLogin" />
+          <NavigationProperty Name="VIEWDATAs" Relationship="SHELLMVCModel.FK_VIEWDATAs_StationNames" FromRole="StationName" ToRole="VIEWDATA" />
+        </EntityType>
+        <EntityType Name="UserLogin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Station" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="StationName" Relationship="SHELLMVCModel.FK_UserLogins_StationNames" FromRole="UserLogin" ToRole="StationName" />
+          <NavigationProperty Name="UserType" Relationship="SHELLMVCModel.FK_UserLogins_UserTypes" FromRole="UserLogin" ToRole="UserType" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserLogins" Relationship="SHELLMVCModel.FK_UserLogins_UserTypes" FromRole="UserType" ToRole="UserLogin" />
+        </EntityType>
+        <EntityType Name="VIEWDATA">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Datetime" Type="DateTime" Precision="3" />
+          <Property Name="Station" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Tempreture" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Humidity" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SetTempreture" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SetHumidity" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="StationName" Relationship="SHELLMVCModel.FK_VIEWDATAs_StationNames" FromRole="VIEWDATA" ToRole="StationName" />
+        </EntityType>
+        <Association Name="FK_UserLogins_StationNames">
+          <End Type="SHELLMVCModel.StationName" Role="StationName" Multiplicity="0..1" />
+          <End Type="SHELLMVCModel.UserLogin" Role="UserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StationName">
+              <PropertyRef Name="StationName1" />
+            </Principal>
+            <Dependent Role="UserLogin">
+              <PropertyRef Name="Station" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIEWDATAs_StationNames">
+          <End Type="SHELLMVCModel.StationName" Role="StationName" Multiplicity="1" />
+          <End Type="SHELLMVCModel.VIEWDATA" Role="VIEWDATA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StationName">
+              <PropertyRef Name="StationName1" />
+            </Principal>
+            <Dependent Role="VIEWDATA">
+              <PropertyRef Name="Station" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLogins_UserTypes">
+          <End Type="SHELLMVCModel.UserType" Role="UserType" Multiplicity="1" />
+          <End Type="SHELLMVCModel.UserLogin" Role="UserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="Type" />
+            </Principal>
+            <Dependent Role="UserLogin">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SHELLMVCModelStoreContainer" CdmEntityContainer="SHELLMVCEntities">
+          <EntitySetMapping Name="SETDATAs">
+            <EntityTypeMapping TypeName="SHELLMVCModel.SETDATA">
+              <MappingFragment StoreEntitySet="SETDATAs">
+                <ScalarProperty Name="Station" ColumnName="Station" />
+                <ScalarProperty Name="SetHumidity" ColumnName="SetHumidity" />
+                <ScalarProperty Name="SetTempreture" ColumnName="SetTempreture" />
+                <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StationNames">
+            <EntityTypeMapping TypeName="SHELLMVCModel.StationName">
+              <MappingFragment StoreEntitySet="StationNames">
+                <ScalarProperty Name="StationName1" ColumnName="StationName1" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLogins">
+            <EntityTypeMapping TypeName="SHELLMVCModel.UserLogin">
+              <MappingFragment StoreEntitySet="UserLogins">
+                <ScalarProperty Name="Station" ColumnName="Station" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTypes">
+            <EntityTypeMapping TypeName="SHELLMVCModel.UserType">
+              <MappingFragment StoreEntitySet="UserTypes">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VIEWDATAs">
+            <EntityTypeMapping TypeName="SHELLMVCModel.VIEWDATA">
+              <MappingFragment StoreEntitySet="VIEWDATAs">
+                <ScalarProperty Name="SetHumidity" ColumnName="SetHumidity" />
+                <ScalarProperty Name="SetTempreture" ColumnName="SetTempreture" />
+                <ScalarProperty Name="Humidity" ColumnName="Humidity" />
+                <ScalarProperty Name="Tempreture" ColumnName="Tempreture" />
+                <ScalarProperty Name="Station" ColumnName="Station" />
+                <ScalarProperty Name="Datetime" ColumnName="Datetime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

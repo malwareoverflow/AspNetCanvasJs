@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>ASP.NET MVC Chart Samples using CanvasJS</title>
+
+    <!-- stylesheets -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- scripts -->
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/jquery-3.1.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+
+    @*<script>
+        $(function () {
+            // #sidebar-toggle-button
+            $('#sidebar-toggle-button').on('click', function () {
+                $('#sidebar').toggleClass('sidebar-toggle');
+                $('#page-content-wrapper').toggleClass('page-content-toggle');
+                fireResize();
+            });
+
+            // sidebar collapse behavior
+            $('#sidebar').on('show.bs.collapse', function () {
+                $('#sidebar').find('.collapse.in').collapse('hide');
+            });
+
+            // To make current link active
+            (function addActiveClassToNestedList() {
+                var pageURL = $(location).attr('href');
+                var URLSplits = pageURL.split('/');
+
+                var routeURL = '/' + URLSplits[URLSplits.length - 3] + '/' + URLSplits[URLSplits.length - 2] + '/';
+                var activeNestedList = $('.sub-menu > li > a[href="' + routeURL + '"]').parent();
+
+                if (activeNestedList.length !== 0 && !activeNestedList.hasClass('active')) {
+                    $('.sub-menu > li').removeClass('active');
+                    activeNestedList.addClass('active');
+                }
+            })();
+
+            function fireResize() {
+                if (document.createEvent) { // W3C
+                    var ev = document.createEvent('Event');
+                    ev.initEvent('resize', true, true);
+                    window.dispatchEvent(ev);
+                }
+                else { // IE
+                    element = document.documentElement;
+                    var event = document.createEventObject();
+                    element.fireEvent("onresize", event);
+                }
+            }
+
+        });
+    </script>*@
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

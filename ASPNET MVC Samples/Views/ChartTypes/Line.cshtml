@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "Line Chart";
+}
+<div>
+  <b>Please select date</b>  <input type="text" name="daterange" id="dates" value="01/21/2015 1:30 PM - 01/01/2015 2:00 PM" />
+
+    <button onclick="Getrangegraph()">GetGraph</button>
+
+</div>
+<div id="chartContainer"></div>
+   <!-- Include Required Prerequisites -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+<script type="text/javascript">
+    $(function () {
+        $('input[name="daterange"]').daterangepicker();
+    });
+</script>
+
+<script type="text/javascript">
+
+    $(function () {
+        var chart = new CanvasJS.Chart("chartContainer", {
+            theme: "theme2",
+            zoomEnabled: true,
+            animationEnabled: true,
+            title: {
+                text: "Line Chart in ASP.Net MVC using CanvasJS"
+            },
+            subtitles: [
+                {
+                    text: "Try Zooming and Panning"
+                }
+            ],
+            data: [
+            {
+                type: "line",
+                
+                dataPoints: [
+				    { x: 10, y: 71 },
+				    { x: 20, y: 55 },
+				    { x: 30, y: 50 },
+				    { x: 40, y: 65 },
+				    { x: 50, y: 95 },
+				    { x: 60, y: 68 },
+				    { x: 70, y: 28 },
+				    { x: 80, y: 34 },
+				    { x: 90, y: 14 },
+				    { x: 100, y: 33 },
+				    { x: 110, y: 42 },
+				    { x: 120, y: 62 },
+                    { x: 130, y: 70 },
+				    { x: 140, y: 85 },
+				    { x: 150, y: 1 },
+				
+                ],
+
+                //You can add dynamic data from the controller as shown below. Check the controller and uncomment the line which generates dataPoints.
+                //dataPoints: @Html.Raw(ViewBag.DataPoints),
+            }
+            ]
+        });
+        chart.render();
+
+    });
+    function Getrangegraph() {
+       
+        var datesrange = $("#dates").val();
+        alert(datesrange);
+        $.ajax({
+
+            type: "GET",
+            url: '/ChartTypes/GetGraphValues',
+            data: { datesrange: datesrange },
+            contentType: "application/json; charset=utf-8",
+            success: successFunc,
+            error:errorFunc
+
+
+        });
+        function successFunc(data,status) {
+            alert(data);
+        }
+        function errorFunc() {
+            alert('Error');
+        }
+    }
+</script>

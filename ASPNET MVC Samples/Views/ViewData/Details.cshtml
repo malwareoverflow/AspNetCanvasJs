@@ -1,0 +1,74 @@
+﻿@model ASPNET_MVC_Samples.VIEWDATA
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>VIEWDATA</h4>
+    	<hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Datetime)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Datetime)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Station)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Station)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Tempreture)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Tempreture)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Humidity)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Humidity)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SetTempreture)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SetTempreture)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SetHumidity)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SetHumidity)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
